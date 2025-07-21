@@ -1,9 +1,9 @@
-from tkinter import *
 import tkinter as tk
-from tkinter import ttk
+from tkinter import *
+import claz
 
 
-pWindow = Tk()  
+pWindow = tk.Tk()  
 pWindow.title("Rozvi")
 pWindow.geometry("1280x600")
 pWindow.resizable(False, False)
@@ -33,25 +33,25 @@ mat.place(x=50, y=10)
 mt = Frame(fron, bg="#B92D39")
 mt.pack(fill=BOTH, pady=(75,0), expand=True)
 
-frame1 = Frame(mt, bg="#752DB9")
+frame1 = Frame(mt, bg="#ffffff")
 frame1.pack(padx=50, pady=30, expand=True)
 
-jk = Label(frame1, text="Materia prima 1", font=("Arial", 10), bg="#862DB9", fg="white")
-jk.place(x=0, y=0)
 
-"""
-m1 = Label(frame1, text="Materia prima 1", font=("Arial", 10), bg="#862DB9", fg="white")
-m1.place(x=0, y=0)
 
-s1 = Label(frame1, text="Stock: 100", font=("Arial", 10), bg="#752DB9", fg="white")
-s1.place(x=0, y=20)
+# m1 = Label(frame1, text="Materia prima 1", font=("Arial", 10), bg="#862DB9", fg="white")
+# m1.place(x=0, y=0)
 
-image1 = tk.PhotoImage(file="src\\img\\imagen (2).png")
-logo1 = Label(frame1, image=image1, bg="#053D38")
-logo1.image1 = image1
-logo1.place(x=0, y=3)
-"""
+# s1 = Label(frame1, text="Stock: 100", font=("Arial", 10), bg="#752DB9", fg="white")
+# s1.place(x=0, y=20)
 
+# image1 = tk.PhotoImage(file="src\\img\\imagen (2).png")
+# logo1 = Label(frame1, image=image1, bg="#053D38")
+# logo1.image1 = image1
+# logo1.place(x=0, y=3)
+
+
+cuadro1 = claz.cuadro(frame1, "src\\img\\1(1).png", "Materia prima 1", "Stock: 100")
+cuadro1.pre()
 
 
 pWindow.mainloop()
