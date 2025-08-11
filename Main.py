@@ -1,13 +1,7 @@
 import tkinter as tk
 from tkinter import *
-import claz
-
-def abrir_ventana(event):
-    nueva_ventana = tk.Tk() 
-    nueva_ventana.title("Nueva ventana")
-    nueva_ventana.geometry("300x200")
-    etiqueta = tk.Label(nueva_ventana, text="Esta es una nueva ventana")
-    etiqueta.pack(pady=20)
+import PVPrin
+import nav
 
 pWindow = tk.Tk()  
 pWindow.title("Rozvi")
@@ -15,19 +9,14 @@ pWindow.geometry("1280x600")
 pWindow.resizable(False, False)
 pWindow.configure(bg="#A3CCAB")
 
-menuf = Frame(pWindow, height=75, bg="#053D38") 
-menuf.pack(side=TOP, fill=X)
+productos ={"sagu":30, "maiz":50, "trigo":20, "arroz":40, "soja":60}
 
-image = tk.PhotoImage(file="src\\img\\1(1).png")
-logo = Label(menuf, image=image, bg="#053D38")
-logo.image = image
-logo.pack(padx=10, side=LEFT)
+nav = nav.nav(photo=tk.PhotoImage(file="src\\img\\1(1).png"), title="Rozvi")##Encabezado de la ventana
+nav.create_nav(pWindow)
 
-titulo = Label(menuf, text="Rozvi", font=("Arial", 30), bg="#053D38", fg="white")
-titulo.pack(padx=10, side=LEFT)
-
-menuL = Frame(pWindow, width=200, bg="#34675C")
+menuL = Frame(pWindow, width=200, bg="#198870")
 menuL.pack(side=LEFT, fill=Y)
+
 
 fron = Frame(pWindow, bg="#A3CCAB")
 fron.pack(side=RIGHT, fill=BOTH, expand=True)
@@ -35,22 +24,32 @@ fron.pack(side=RIGHT, fill=BOTH, expand=True)
 mat = Label(fron, text="Materias primas disponibles", font=("Arial", 20), bg="#A3CCAB", fg="black")
 mat.place(x=50, y=10)
 
-mt = Frame(fron, bg="#B92D39")
+mt = Canvas(fron, bg="#B92D39")
 mt.pack(fill=BOTH, pady=(75,0), expand=True)
 
-frame1 = Frame(mt, bg="#ffffff")
-frame1.pack(padx=50, pady=30, expand=True)
+cont = 0
+cont2 = 0
 
-producto1 = claz.MateriaPrima("Materia prima 1", "Stock: 100", "src\\img\\1(1).png")
-cuadro1 = claz.CuadroMateriaPrima(frame1, producto1)
-cuadro1.mostrar()
+print("Productos:", len(productos))
 
+for i in productos:
+    if cont != 0 and cont % 3 == 0:
+        cont2 += 1
+        cont = 0
+    else:
+        pass
+    frame = Frame(mt, bg="#ffffff")
+    frame.grid(row=cont2, column=cont, padx=10, pady=10, sticky="nsew")
+    cont += 1
+    producto = PVPrin.MateriaPrima(i, f"Stock: {productos[i]}", "src\\img\\1(1).png")
+    cuadro = PVPrin.CuadroMateriaPrima(frame, producto)
+    cuadro.mostrar()
 
+    modificar_stock = PVPrin.ModificarStock(frame, producto)
+    modificar_stock.crear_boton()
 
-modificar_stock = claz.ModificarStock(frame1, producto1)
-modificar_stock.crear_boton()
-
-
+    on_click = PVPrin.VenProducto(cuadro)
+    on_click.on()
 
 
 pWindow.mainloop()

@@ -18,13 +18,13 @@ class CuadroMateriaPrima:
 
         etiqueta3 = tk.Label(self.ventana, image=image, bg="white")
         etiqueta3.image = image
-        etiqueta3.grid(row=0, column=0, padx=10, pady=10)
+        etiqueta3.grid(row=0, column=0, padx=10, pady=0)
         
         etiqueta1 = tk.Label(self.ventana, text=self.materia_prima.nombre, bg="lightblue")
-        etiqueta1.grid(row=1, column=0, padx=10, pady=10 )
+        etiqueta1.grid(row=1, column=0, padx=10, pady=0 )
 
         etiqueta2 = tk.Label(self.ventana, text=self.materia_prima.stock, bg="lightblue")
-        etiqueta2.grid(row=2, column=0, padx=10, pady=10)
+        etiqueta2.grid(row=2, column=0, padx=10, pady=0)
 
 
 class ModificarStock:
@@ -61,15 +61,18 @@ class ModificarStock:
 
 class VenProducto:
     def __init__(self, CuadroMateriaPrima):
-        self.CuadroMateriaPrima = CuadroMateriaPrima
+        self.ventana = CuadroMateriaPrima.ventana
         
-    
+    def on (self):
+        self.ventana.bind("<Button-1>", self.mostrar)
+        
+    def mostrar(self, event):
 
-    def mostrar(event):
         nueva_ventana = tk.Tk() 
         nueva_ventana.title("Nueva ventana")
         nueva_ventana.geometry("300x200")
         etiqueta = tk.Label(nueva_ventana, text="Esta es una nueva ventana")
         etiqueta.pack(pady=20)
+        
 
         
