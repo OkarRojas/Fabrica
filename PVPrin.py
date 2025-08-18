@@ -34,7 +34,8 @@ class ModificarStock:
 
     def modificarm(self):
         stock = int(self.materia_prima.stock.split(": ")[1])  # Example modification
-        stock -= 10
+        if stock > 0:
+            stock -= 10
         self.materia_prima.stock = f"Stock: {stock}"
         for widget in self.ventana.grid_slaves(row=2, column=0):
             if isinstance(widget, tk.Label):
@@ -42,7 +43,8 @@ class ModificarStock:
 
     def modificarp(self):
         stock = int(self.materia_prima.stock.split(": ")[1])  # Example modification
-        stock += 10
+        if stock < 100:
+            stock += 10
         self.materia_prima.stock = f"Stock: {stock}"
         for widget in self.ventana.grid_slaves(row=2, column=0):
             if isinstance(widget, tk.Label):
