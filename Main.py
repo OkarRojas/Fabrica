@@ -15,10 +15,35 @@ def eliminar_producto(jk ):
     # Clear the canvas
     for widget in jk.winfo_children():
         widget.destroy()
-
+ 
+jk = 0
 def animar_productos(canvas):
-    liena_Menu = Animaciones.LineaAnimada(canvas, velocidad=2, x1=15, y1=75, x2=75, y2=75, tipo="horizontal")
-    liena_Menu2 = Animaciones.LineaAnimada(canvas, velocidad=2, x1=15, y1=50, x2=15, y2=100, tipo="vertical")
+    global jk
+    if jk == 0:
+        # liena_Menu = Animaciones.LineaAnimada(canvas, velocidad=2, x1=15, y1=75, x2=75, y2=75, tipo="horizontal")
+        # liena_Menu2 = Animaciones.LineaAnimada(canvas, velocidad=2, x1=15, y1=50, x2=15, y2=100, tipo="vertical")
+        # # Animar el desplazamiento del label verticalmente
+        # animaciones_label = Animaciones.Animaciones_label(destroy, velocidad=30, canvas=canvas, start_y=50, end_y=100)
+        # animaciones_label.animar_label_verticales()
+        run = True
+        xvel =3
+        count = 0
+        while run:
+
+            if count > 100:
+                run = False
+            canvas.move(destroy, 0, xvel)
+            canvas.update()
+            time.sleep(0.01)
+            count += 1
+
+    else:
+        animaciones_label2 = Animaciones.Animaciones_label(destroy, velocidad=30, canvas=canvas, start_y=1000, end_y=50)
+        animaciones_label2.animar_label_verticales()
+        jk = 0
+        canvas.delete("all")
+        liena_Menu4 = Animaciones.LineaAnimada(canvas, velocidad=2, x1=15, y1=75, x2=75, y2=75, tipo="horizontal")
+        liena_Menu4.iniciar_animacion_horizontal_i()
 
 # Paleta armónica
 COLOR_PRINCIPAL = "#E27D0A"      # Naranja
@@ -33,7 +58,7 @@ class MainWindow:
         self.root.title("Rozvi")
         self.root.geometry("1280x600")
         self.root.resizable(False, False)
-        self.root.configure(bg=COLOR_NEUTRO_CLARO)
+        self.root.configure(bg=COLOR_NEUTRO_OSCURO)
 
         self.productos = productos
         self.setup_ui()
@@ -73,15 +98,9 @@ class MainWindow:
 
         self.crear_cuadros(mt)
 
-        destroy = tk.Label(
-            menuL,
-            text="Eliminar producto",
-            font=("Arial", 12),
-            bg=COLOR_NEUTRO_OSCURO,
-            fg="white"
-        )
-        destroy.place(x=10, y=200)
-        destroy.bind("<Button-1>", lambda event: eliminar_producto(mt))
+        global destroy
+        destroy = Canvas.create_text(menuL, 40, 100, text="Producto", fill="white", font=("Arial", 15), anchor="center")
+        
 
 
 
